@@ -1,6 +1,6 @@
 {
   "name": "mta-wechat-plugins",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "腾讯移动分析(MTA)-微信小程序uniapp框架插件",
   "main": "index.js",
   "repository": {
