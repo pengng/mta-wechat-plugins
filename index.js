@@ -2,15 +2,21 @@ import MTA from 'mta-wechat-analysis'
 const MTAWechatPlugins = {}
 
 MTAWechatPlugins.install = function (Vue, options) {
-  Vue.mixin({
+  let { autoReport } = options
+  let mixinOpt = {
     onLaunch(lauchOpts) {
-      options = {...options, autoReport: false, lauchOpts}
+      options = {...options, lauchOpts}
       MTA.App.init(options)
-    },
-    onLoad() {
-      MTA.Page.init()
     }
-  })
+  }
+
+  if (autoReport) {
+    autoReport = false
+    options = {...options, autoReport}
+    mixinOpt = {...mixinOpt, onLoad() { MTA.Page.init() }}
+  }
+
+  Vue.mixin(mixinOpt)
 
   Vue.prototype.$mta = MTA
 }
